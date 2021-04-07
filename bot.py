@@ -6,15 +6,16 @@ token = open("token.txt").read()
 wa_key = "QJE2KJ-9KXKKEVGXX"
 
 intents = discord.Intents.all()
-bot = commands.Bot(command_prefix=commands.when_mentioned_or('-'), intents=intents)
+bot = commands.Bot(command_prefix=commands.when_mentioned_or("-"), intents=intents)
 
-cogs = ['jishaku']
+cogs = ["jishaku"]
 
 for cog in cogs:
     try:
         bot.load_extension(cog)
     except Exception as e:
         print(c.Red + "Error loading cog '" + cog + "': " + e + c.c)
+
 
 @bot.command()
 async def hmm(ctx, *, request):
@@ -35,8 +36,10 @@ async def hmm(ctx, *, request):
             await ctx.send(str(x))
     print(c.c)
 
+
 @bot.event
 async def on_ready():
     print(f"{c.Green}Ready{c.c}")
+
 
 bot.run(token)
