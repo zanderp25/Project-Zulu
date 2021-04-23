@@ -1,6 +1,6 @@
 from discord.ext import commands
 from color import c
-import discord, requests
+import discord, requests, config
 
 class BigBrain(commands.Cog):
     def __init__(self, bot):
@@ -38,7 +38,7 @@ class BigBrain(commands.Cog):
         print(f"{c.Green}Request: {c.c}{request} {c.Green}Requested By: {c.c}{ctx.author}")
         request = "%2b".join(request.split("+"))
         request = "+".join(request.split(" "))
-        r = requests.get(f"https://api.wolframalpha.com/v1/result?i={request}&appid={wa_key}")
+        r = requests.get(f"https://api.wolframalpha.com/v1/result?i={request}&appid={config.Token.wolfram}")
         if r.status_code != 200:
             if r.status_code == 501:
                 print(f"{c.Red}No answer found - Returned 501{c.c}")

@@ -4,7 +4,6 @@ from color import c
 import config
 
 token = config.Token.bot
-wa_key = config.Token.wolfram
 
 intents = discord.Intents.all()
 bot = commands.Bot(command_prefix=commands.when_mentioned_or("-"), intents=intents)
