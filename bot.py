@@ -5,10 +5,10 @@ from color import c
 token = open("token.txt").read()
 wa_key = "QJE2KJ-9KXKKEVGXX"
 
-intents = discord.Intents.default()
-bot = commands.Bot(command_prefix=commands.when_mentioned_or('-'), intents=intents)
+intents = discord.Intents.all()
+bot = commands.Bot(command_prefix=commands.when_mentioned_or("-"), intents=intents)
 
-cogs = ['jishaku']
+cogs = ["jishaku"]
 
 for cog in cogs:
     try:
