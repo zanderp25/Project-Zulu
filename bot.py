@@ -1,9 +1,10 @@
 from discord.ext import commands
 import requests, discord
 from color import c
+import config
 
-token = open("token.txt").read()
-wa_key = "QJE2KJ-9KXKKEVGXX"
+token = config.Token.bot
+wa_key = config.Token.wolfram
 
 intents = discord.Intents.all()
 bot = commands.Bot(command_prefix=commands.when_mentioned_or("-"), intents=intents)
@@ -30,6 +31,7 @@ async def on_message(message):
         else:
             await message.reply('A proper question ends with a question mark')
     else:
+        pass
         # if message.channel == 710474717584425071:
         #     await message.reply(f'Sorry to bother, but the processed message does not contain a question.\nMessage content: ```{message.content}```')
     if message.content.startswith("Define"):
