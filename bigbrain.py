@@ -19,7 +19,7 @@ class BigBrain(commands.Cog):
             pass
             # if message.channel == 710474717584425071:
             #     await message.reply(f'Sorry to bother, but the processed message does not contain a question.\nMessage content: ```{message.content}```')
-        if message.content.startswith("Define"):
+        if message.content.lower().startswith("define"):
             m = message.content.split(" ")
             if len(m) == 1:
                 try:
