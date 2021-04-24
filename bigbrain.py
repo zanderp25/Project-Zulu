@@ -10,7 +10,7 @@ class BigBrain(commands.Cog):
     async def on_message(self, message):
         if message.author == self.bot.user: return
 
-        if message.content.lower().startswith(("how", "when", "where" "why", "what", "which")):
+        if message.content.lower().startswith(("how", "when", "where", "why", "what", "which")):
             if message.content.endswith("?"):
                 await self.waget(message, message.content)
             else:
@@ -35,7 +35,7 @@ class BigBrain(commands.Cog):
         await self.waget(ctx, request)
 
     async def waget(self, ctx, request):
-        print(f"{c.Green}Request: {c.c}{request} {c.Green}Requested By: {c.c}{ctx.author}")
+        print(f"{c.Yellow}Request: {c.c}{request} {c.YellowDark}Requested By: {c.c}{ctx.author}")
         request = "%2b".join(request.split("+"))
         request = "+".join(request.split(" "))
         r = requests.get(f"https://api.wolframalpha.com/v1/result?i={request}&appid={config.Token.wolfram}")
@@ -47,17 +47,19 @@ class BigBrain(commands.Cog):
                 except:
                     await ctx.send(f"Hmm... I don't seem to have an answer for that.")
             elif r.status_code == 403:
-                print(f"Permission Denied - Returned 403")
+                print(f"{c.Red}Permission Denied - Returned 403{c.c}")
                 try:
                     await ctx.reply(f"For some reason, I don't have permission to process your request. Consult the owner of the bot for more info.")
                 except:
                     await ctx.send(f"For some reason, I don't have permission to process your request. Consult the owner of the bot for more info.")
             elif r.status_code == 404:
+                print(f"{c.Red}Not Found - Returned 404{c.c}")
                 try:
                     await ctx.reply(f"For some reason, I am unable to process your request. Consult the owner of the bot for more info.")
                 except:
                     await ctx.send(f"For some reason, I am unable to process your request. Consult the owner of the bot for more info.")
             else:
+                print(f"{c.Red}Unknown Error - Returned {r.status_code}{c.c}")
                 try:
                     await ctx.reply(f"Hmmm... an unknown error occured... ```Status code: {r.status_code}```")
                 except:
@@ -73,6 +75,7 @@ class BigBrain(commands.Cog):
                 x = '"'.join(x)
             else:
                 x = str(r.content)
+            print(f"{c.Cyan}Answer:{c.c} {x}")
             try:
                 await ctx.reply(str(x))
             except:

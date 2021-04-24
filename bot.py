@@ -18,6 +18,6 @@ for cog in cogs:
 
 @bot.event
 async def on_ready():
-    print(f"{c.Green}Ready{c.c}")
+    print(f"{c.Green}Logged in as {c.Yellow}{bot.user}{c.c}")
 
 bot.run(token)
