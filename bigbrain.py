@@ -28,7 +28,6 @@ class BigBrain(commands.Cog):
                     await message.send(f"What do you want me to define?")
             else:
                 await self.waget(message, message.content)
-        await self.bot.process_commands(message)
 
     @commands.command(aliases=["bigbrain","?","¿"])
     async def hmm(self, ctx, *, request):
@@ -75,6 +74,7 @@ class BigBrain(commands.Cog):
                 x = '"'.join(x)
             else:
                 x = str(r.content)
+            x = "-".join(str(x).split('\\xe2\\x80\\x90'))
             print(f"{c.Cyan}Answer:{c.c} {x}")
             try:
                 await ctx.reply(str(x))
