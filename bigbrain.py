@@ -64,17 +64,7 @@ class BigBrain(commands.Cog):
                 except:
                     await ctx.send(f"Hmmm... an unknown error occured... ```Status code: {r.status_code}```")
         else:
-            if str(r.content).startswith(("b'", 'b"')):
-                if str(r.content).startswith("b'"):
-                    x = str(r.content).split("'")
-                elif str(r.content).startswith('b"'):
-                    x = str(r.content).split('"')
-                x.remove(x[0])
-                x.remove(x[len(x) - 1])
-                x = '"'.join(x)
-            else:
-                x = str(r.content)
-            x = "-".join(str(x).split('\\xe2\\x80\\x90'))
+            x = r.content.decode()
             print(f"{c.Cyan}Answer:{c.c} {x}")
             try:
                 await ctx.reply(str(x))
