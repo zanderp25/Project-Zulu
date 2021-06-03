@@ -15,10 +15,6 @@ class BigBrain(commands.Cog):
                 await self.waget(message, message.content)
             else:
                 await message.reply('A proper question ends with a question mark lol', delete_after=5)
-        else:
-            pass
-            # if message.channel == 710474717584425071:
-            #     await message.reply(f'Sorry to bother, but the processed message does not contain a question.\nMessage content: ```{message.content}```')
         if message.content.lower().startswith("define"):
             m = message.content.split(" ")
             if len(m) == 1:
@@ -33,7 +29,27 @@ class BigBrain(commands.Cog):
     async def hmm(self, ctx, *, request):
         await self.waget(ctx, request)
 
+    async def check_message(self, ctx, message):
+        qna = {
+            "who are you?":"I am Big Brain Bot, powered by Wolfram Alpha.",
+            "who made you?":"I was made by Zanderp25. You can come see his server here: *https://discord.gg/672yY5v*.\n\
+                I also use the Wolfram Alpha API that was made by Stephen Wolfram and his team.",
+            "define yeet":"(╯°□°）╯︵ ┻━┻",
+            "where am i?":"I don't know. Discord doesn't tell me.",
+            "what is my ip address?":"I don't know. Discord doesn't tell me.",
+            "What's the weather like today?":"Today, it's cloudy with a chance of meatballs.",
+            "question":"Answer",
+        }
+        result = qna.get(message.content.lower(), False)
+        if result is not False:
+            ctx.reply(result)
+            return True
+        else:
+            return False
+
     async def waget(self, ctx, request):
+        if await check_message(ctx, request):
+            return
         print(f"{c.Yellow}Request: {c.c}{request} {c.YellowDark}Requested By: {c.c}{ctx.author}")
         request = "%2b".join(request.split("+"))
         request = "+".join(request.split(" "))
