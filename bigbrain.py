@@ -42,7 +42,7 @@ class BigBrain(commands.Cog):
         }
         result = qna.get(message.content.lower(), False)
         if result is not False:
-            ctx.reply(result)
+            await ctx.reply(result)
             return True
         else:
             return False
