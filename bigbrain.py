@@ -32,8 +32,7 @@ class BigBrain(commands.Cog):
     async def check_message(self, ctx, request):
         qna = {
             "who are you?":"I am Big Brain Bot, powered by Wolfram Alpha.",
-            "who made you?":"I was made by Zanderp25. You can come see his server here: *https://discord.gg/672yY5v*.\n\
-            I also use the Wolfram Alpha API that was made by Stephen Wolfram and his team.",
+            "who made you?":"I was made by Zanderp25. You can come see his server here: *https://discord.gg/672yY5v*.\nI also use the Wolfram Alpha API that was made by Stephen Wolfram and his team.",
             "define yeet":"(╯°□°）╯︵ ┻━┻",
             "where am i?":"I don't know. Discord doesn't tell me.",
             "what is my ip address?":"I don't know. Discord doesn't tell me.",
