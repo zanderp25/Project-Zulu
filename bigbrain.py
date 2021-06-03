@@ -29,7 +29,7 @@ class BigBrain(commands.Cog):
     async def hmm(self, ctx, *, request):
         await self.waget(ctx, request)
 
-    async def check_message(self, ctx, message):
+    async def check_message(self, ctx, request):
         qna = {
             "who are you?":"I am Big Brain Bot, powered by Wolfram Alpha.",
             "who made you?":"I was made by Zanderp25. You can come see his server here: *https://discord.gg/672yY5v*.\n\
@@ -40,7 +40,7 @@ class BigBrain(commands.Cog):
             "What's the weather like today?":"Today, it's cloudy with a chance of meatballs.",
             "question":"Answer",
         }
-        result = qna.get(message.content.lower(), False)
+        result = qna.get(request.lower(), False)
         if result is not False:
             await ctx.reply(result)
             return True
