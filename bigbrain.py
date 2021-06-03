@@ -47,7 +47,7 @@ class BigBrain(commands.Cog):
             return False
 
     async def waget(self, ctx, request):
-        m = ctx.reply("Loading...")
+        m = await ctx.reply("Loading...")
         print(f"{c.Yellow}Request: {c.c}{request} {c.YellowDark}Requested By: {c.c}{ctx.author}")
         x = await self.check_message(ctx, request, m)
         if x is False:
