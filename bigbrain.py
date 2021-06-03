@@ -48,7 +48,7 @@ class BigBrain(commands.Cog):
             return False
 
     async def waget(self, ctx, request):
-        if await check_message(ctx, request):
+        if await self.check_message(ctx, request):
             return
         print(f"{c.Yellow}Request: {c.c}{request} {c.YellowDark}Requested By: {c.c}{ctx.author}")
         request = "%2b".join(request.split("+"))
