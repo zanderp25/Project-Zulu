@@ -29,62 +29,53 @@ class BigBrain(commands.Cog):
     async def hmm(self, ctx, *, request):
         await self.waget(ctx, request)
 
-    async def check_message(self, ctx, request):
+    async def check_message(self, ctx, request, m):
         qna = {
             "who are you?":"I am Big Brain Bot, powered by Wolfram Alpha.",
             "who made you?":"I was made by Zanderp25. You can come see his server here: *https://discord.gg/672yY5v*.\nI also use the Wolfram Alpha API that was made by Stephen Wolfram and his team.",
             "define yeet":"(╯°□°）╯︵ ┻━┻",
             "where am i?":"I don't know. Discord doesn't tell me.",
             "what is my ip address?":"I don't know. Discord doesn't tell me.",
-            "What's the weather like today?":"Today, it's cloudy with a chance of meatballs.",
+            "what's the weather like today?":"Today, it's cloudy with a chance of meatballs.",
             "question":"Answer",
         }
         result = qna.get(request.lower(), False)
         if result is not False:
-            await ctx.reply(result)
-            return True
+            await m.edit(content=result)
+            return result
         else:
             return False
 
     async def waget(self, ctx, request):
-        if await self.check_message(ctx, request):
-            return
+        m = ctx.reply("Loading...")
         print(f"{c.Yellow}Request: {c.c}{request} {c.YellowDark}Requested By: {c.c}{ctx.author}")
+        x = await self.check_message(ctx, request, m)
+        if x is False:
+            pass
+        else:
+            print(f"{c.Grey}Offline {c.Cyan}Answer:{c.c} {x}")
+            await m.edit(content=str(x))
+            return
         request = "%2b".join(request.split("+"))
         request = "+".join(request.split(" "))
         r = requests.get(f"https://api.wolframalpha.com/v1/result?i={request}&appid={config.Token.wolfram}")
         if r.status_code != 200:
             if r.status_code == 501:
                 print(f"{c.Red}No answer found - Returned 501{c.c}")
-                try:
-                    await ctx.reply(f"Hmm... I don't seem to have an answer for that.")
-                except:
-                    await ctx.send(f"Hmm... I don't seem to have an answer for that.")
+                await m.edit(f"Hmm... I don't seem to have an answer for that.")
             elif r.status_code == 403:
                 print(f"{c.Red}Permission Denied - Returned 403{c.c}")
-                try:
-                    await ctx.reply(f"For some reason, I don't have permission to process your request. Consult the owner of the bot for more info.")
-                except:
-                    await ctx.send(f"For some reason, I don't have permission to process your request. Consult the owner of the bot for more info.")
+                await m.edit(content=f"For some reason, I don't have permission to process your request. Consult the owner of the bot for more info.")
             elif r.status_code == 404:
                 print(f"{c.Red}Not Found - Returned 404{c.c}")
-                try:
-                    await ctx.reply(f"For some reason, I am unable to process your request. Consult the owner of the bot for more info.")
-                except:
-                    await ctx.send(f"For some reason, I am unable to process your request. Consult the owner of the bot for more info.")
+                await m.edit(content=f"For some reason, I am unable to process your request. Consult the owner of the bot for more info.")
             else:
                 print(f"{c.Red}Unknown Error - Returned {r.status_code}{c.c}")
-                try:
-                    await ctx.reply(f"Hmmm... an unknown error occured... ```Status code: {r.status_code}```")
-                except:
-                    await ctx.send(f"Hmmm... an unknown error occured... ```Status code: {r.status_code}```")
+                await m.edit(content=f"Hmmm... an unknown error occured... ```Status code: {r.status_code}```")
         else:
             x = r.content.decode()
             print(f"{c.Cyan}Answer:{c.c} {x}")
-            try:
-                await ctx.reply(str(x))
-            except:
-                await ctx.send(str(x))
+            await m.edit(content=str(x))
 
 def setup(bot):
     bot.add_cog(BigBrain(bot))
