@@ -61,7 +61,7 @@ class BigBrain(commands.Cog):
         if r.status_code != 200:
             if r.status_code == 501:
                 print(f"{c.Red}No answer found - Returned 501{c.c}")
-                await m.edit(f"Hmm... I don't seem to have an answer for that.")
+                await m.edit(content=f"Hmm... I don't seem to have an answer for that.")
             elif r.status_code == 403:
                 print(f"{c.Red}Permission Denied - Returned 403{c.c}")
                 await m.edit(content=f"For some reason, I don't have permission to process your request. Consult the owner of the bot for more info.")
