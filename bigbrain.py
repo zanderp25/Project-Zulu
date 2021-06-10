@@ -55,6 +55,7 @@ class BigBrain(commands.Cog):
             await m.edit(content=str(x))
             return
         request = "%2b".join(request.split("+"))
+        request = "%26".join(request.split("&"))
         request = "+".join(request.split(" "))
         r = requests.get(f"https://api.wolframalpha.com/v1/result?i={request}&appid={config.Token.wolfram}")
         if r.status_code != 200:
