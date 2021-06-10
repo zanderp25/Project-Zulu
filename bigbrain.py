@@ -50,9 +50,7 @@ class BigBrain(commands.Cog):
         m = await ctx.reply("Loading...")
         print(f"{c.Yellow}Request: {c.c}{request} {c.YellowDark}Requested By: {c.c}{ctx.author}")
         x = await self.check_message(ctx, request, m)
-        if x is False:
-            pass
-        else:
+        if x != False:
             print(f"{c.Grey}Offline {c.Cyan}Answer:{c.c} {x}")
             await m.edit(content=str(x))
             return
