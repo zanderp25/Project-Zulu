@@ -10,11 +10,12 @@ class BigBrain(commands.Cog):
     async def on_message(self, message):
         if message.author == self.bot.user: return
 
-        if message.content.lower().startswith(("how", "when", "where", "why", "what", "which", "who")):
+        if message.content.lower().startswith(("how ", "when ", "where ", "why ", "what ", "which ", "who ")):
             if message.content.endswith("?"):
                 await self.waget(message, message.content)
             else:
-                await message.reply('A proper question ends with a question mark lol', delete_after=5)
+                # await message.reply('A proper question ends with a question mark lol', delete_after=5)
+                await message.add_reaction('❓')
         if message.content.lower().startswith("define"):
             m = message.content.split(" ")
             if len(m) == 1:
