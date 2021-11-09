@@ -10,7 +10,7 @@ class BigBrain(commands.Cog):
     async def on_message(self, message):
         if message.author == self.bot.user: return
 
-        if message.content.lower().startswith(("how ", "when ", "where ", "why ", "what ", "which ", "who ", "do ", "did ", "is ")):
+        if message.content.lower().startswith(("how ", "when ", "where ", "why ", "what ", "which ", "who ", "do ", "did ", "is ", "are ")):
             if message.content.endswith("?"):
                 await self.waget(message, message.content)
             else:
