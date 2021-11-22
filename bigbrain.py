@@ -11,9 +11,9 @@ class BigBrain(commands.Cog):
         if message.author == self.bot.user: return
         if message.author.bot: return
 
-        if message.content.startswith(self.bot.mention):
-            if len(message.content) > len(self.bot.mention):
-                request = message.content[len(self.bot.mention):].strip()
+        if message.content.startswith(self.bot.user.mention):
+            if len(message.content) > len(self.bot.user.mention):
+                request = message.content[len(self.bot.user.mention):].strip()
                 await self.waget(message, request)
             else:
                 await message.reply(
