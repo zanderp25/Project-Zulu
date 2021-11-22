@@ -22,8 +22,8 @@ class BigBrain(commands.Cog):
                         "\"Why is the sky blue?\" or \"What is the capital of Colombia?\" \n"
                         "To use BigBrain, simply type the question you want to ask after the bot's mention.\n"
                         "For example, if you want to ask \"What is the capital of Colombia?\", type:\n"
-                        f"```@{self.bot} What is the capital of Colombia?```\n\n"
-                        "This bot is powered by the Wolfram Alpha API. For more information, visit:"
+                        f"```@{self.bot.user} What is the capital of Colombia?```\n\n"
+                        "This bot is powered by the Wolfram Alpha API. For more information, visit: "
                         "https://www.wolframalpha.com/",
                 ).set_author(
                     name="Big Brain Bot",
