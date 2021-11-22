@@ -3,28 +3,34 @@ from color import c
 import discord, requests, config
 
 class BigBrain(commands.Cog):
-    def __init__(self, bot):
+    def __init__(self, bot:commands.Bot):
         self.bot = bot
 
     @commands.Cog.listener(name="on_message")
-    async def on_message(self, message):
+    async def on_message(self, message:discord.Message):
         if message.author == self.bot.user: return
+        if message.author.bot: return
 
-        if message.content.lower().startswith(("how ", "when ", "where ", "why ", "what ", "which ", "who ", "do ", "did ", "is ", "are ")):
-            if message.content.endswith("?"):
-                await self.waget(message, message.content)
+        if message.content.startswith(self.bot.mention):
+            if len(message.content) > len(self.bot.mention):
+                request = message.content[len(self.bot.mention):].strip()
+                await self.waget(message, request)
             else:
-                # await message.reply('A proper question ends with a question mark lol', delete_after=5)
-                await message.add_reaction('❓')
-        if message.content.lower().startswith("define"):
-            m = message.content.split(" ")
-            if len(m) == 1:
-                try:
-                    await message.reply(f"What do you want me to define?")
-                except:
-                    await message.send(f"What do you want me to define?")
-            else:
-                await self.waget(message, message.content)
+                await message.reply(
+                    embed=discord.Embed(
+                        title="Big Brain Bot",
+                        description="BigBrain is a bot by Zanderp25 that can answer various questions like"
+                        "\"Why is the sky blue?\" or \"What is the capital of Colombia?\" \n"
+                        "To use BigBrain, simply type the question you want to ask after the bot's mention.\n"
+                        "For example, if you want to ask \"What is the capital of Colombia?\", type:\n"
+                        f"```@{self.bot} What is the capital of Colombia?```\n\n"
+                        "This bot is powered by the Wolfram Alpha API. For more information, visit:"
+                        "https://www.wolframalpha.com/",
+                ).set_author(
+                    name="Big Brain Bot",
+                    icon_url=self.bot.user.avatar_url,
+                )
+            )
 
     @commands.command(aliases=["bigbrain","?","¿"])
     async def hmm(self, ctx, *, request):
