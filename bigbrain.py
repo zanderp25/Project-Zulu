@@ -1,6 +1,6 @@
 from discord.ext import commands
 from color import c
-import discord, requests, config
+import discord, requests, config, re
 
 class BigBrain(commands.Cog):
     def __init__(self, bot:commands.Bot):
@@ -8,13 +8,12 @@ class BigBrain(commands.Cog):
 
     @commands.Cog.listener(name="on_message")
     async def on_message(self, message:discord.Message):
-        if message.author == self.bot.user: return
         if message.author.bot: return
 
-        if message.content.startswith(self.bot.user.mention):
-            if len(message.content) > len(self.bot.user.mention):
-                request = message.content[len(self.bot.user.mention):].strip()
-                await self.waget(message, request)
+        match = re.match(rf"<@!?{self.bot.user.id}>", message.content)
+        if match:
+            if message.content != match.string:
+                await self.waget(message, message.content.replace(match.string, '')).strip()
             else:
                 await message.reply(
                     embed=discord.Embed(
