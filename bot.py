@@ -6,7 +6,7 @@ import config
 token = config.Token.bot
 
 intents = discord.Intents.all()
-bot = commands.Bot(command_prefix=commands.when_mentioned_or("-"), intents=intents)
+bot = commands.Bot(command_prefix="-", intents=intents)
 
 cogs = ["jishaku", "bigbrain"]
 
