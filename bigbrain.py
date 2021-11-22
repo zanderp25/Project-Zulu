@@ -12,17 +12,17 @@ class BigBrain(commands.Cog):
 
         match = re.match(rf"<@!?{self.bot.user.id}>", message.content)
         if match:
-            if message.content != match.string:
-                await self.waget(message, message.content.replace(match.string, '')).strip()
+            if message.content != match.group(0):
+                await self.waget(message, message.content.replace(match.group(0), '')).strip()
             else:
                 await message.reply(
                     embed=discord.Embed(
                         title="Big Brain Bot",
-                        description="BigBrain is a bot by Zanderp25 that can answer various questions like"
-                        "\"Why is the sky blue?\" or \"What is the capital of Colombia?\" \n"
+                        description="Big Brain Bot is a bot by Zanderp25 that can answer various questions like"
+                        "\"Why is the sky blue?\" or \"What is the capital of Colombia?\" \n\n"
                         "To use BigBrain, simply type the question you want to ask after the bot's mention.\n"
-                        "For example, if you want to ask \"What is the capital of Colombia?\", type:\n"
-                        f"```@{self.bot.user} What is the capital of Colombia?```\n\n"
+                        "For example, if you want to ask \"Why is the sky blue?\", type:\n"
+                        f"```@{self.bot.user} Whay is the sky blue?```\n"
                         "This bot is powered by the Wolfram Alpha API. For more information, visit: "
                         "https://www.wolframalpha.com/",
                 ).set_author(
