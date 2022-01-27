@@ -27,7 +27,7 @@ class BigBrain(commands.Cog):
                         "https://www.wolframalpha.com/",
                 ).set_author(
                     name="Big Brain Bot",
-                    icon_url=self.bot.user.avatar_url,
+                    icon_url=self.bot.user.avatar.url,
                 )
             )
 
