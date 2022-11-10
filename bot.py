@@ -10,14 +10,11 @@ bot = commands.Bot(command_prefix="-", intents=intents)
 
 cogs = ["jishaku", "bigbrain"]
 
-for cog in cogs:
-    try:
-        bot.load_extension(cog)
-    except Exception as e:
-        print(c.Red + "Error loading cog '" + cog + "': " + e + c.c)
-
 @bot.event
 async def on_ready():
+    for cog in cogs:
+        await bot.load_extension(cog)
+    await bot.tree.sync()
     print(f"{c.Green}Logged in as {c.Yellow}{bot.user}{c.c}")
 
 bot.run(token)
