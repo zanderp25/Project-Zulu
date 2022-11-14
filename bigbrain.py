@@ -46,6 +46,12 @@ class BigBrain(commands.Cog):
         await ctx.interaction.response.defer()
         await ctx.reply(await self.waget(ctx.author, ctx.guild, question))
 
+    @commands.hybrid_command(name="define", description="Define a word or phrase.")
+    @app_commands.describe(word="The word or phrase you want to define.")
+    async def define(self, ctx: commands.Context, word: str):
+        await ctx.interaction.response.defer()
+        await ctx.reply(await self.waget(ctx.author, ctx.guild, "Define " + word, define=True))
+
     async def message_context(self, interaction: discord.Interaction, message: discord.Message):
         await interaction.response.defer()
         await message.reply(await self.waget(interaction.user, interaction.guild, message.content, ctx_menu=True))
